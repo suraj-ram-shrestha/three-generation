@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
 	def index
-		@users = User.all
+		grandfather_relation = RelationshipType.grandfather.last
+		@grandfathers = grandfather_relation.users.uniq
 	end
 
 	def import

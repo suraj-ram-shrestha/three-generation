@@ -14,7 +14,7 @@ sanulal =
 rajaram =
   User.find_or_create_by(name: 'Raja Ram Shrestha')
 suraj =
-  User.find_or_create_by(name: 'Suraj Raj Shrestha')
+  User.find_or_create_by(name: 'Suraj Ram Shrestha')
 
 sanulal.relate(rajaram, father)
 rajaram.relate(suraj, father)

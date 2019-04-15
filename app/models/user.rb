@@ -4,7 +4,7 @@ class User < ApplicationRecord
 	require 'activerecord-import/base'
 
 	has_many :relationships
-	has_many :relationship_types, class_name: 'Relationship', foreign_key: 'related_user_id'
+	has_many :reverse_relationships, class_name: 'Relationship', foreign_key: 'related_user_id'
 
 	GRAND_FATHER = RelationshipType.find_or_create_by(name: 'grandfather', reverse_name: 'grandson')
 	FATHER = RelationshipType.find_or_create_by(name: 'father', reverse_name: 'son')
@@ -38,5 +38,10 @@ class User < ApplicationRecord
 
 	def relate(related_user, relationship_type)
 	  self.relationships.find_or_create_by!(relationship_type_id: relationship_type.id, related_user_id: related_user.id)
+	end
+
+	def sons
+		sons_relationships = relationships.where(relationship_type_id: FATHER.id, user_id: id)
+		User.where(id: sons_relationships.pluck(:related_user_id))
 	end
 end

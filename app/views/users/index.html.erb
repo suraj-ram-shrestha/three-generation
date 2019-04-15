@@ -8,17 +8,18 @@
 		<%= submit_tag "Import from file" %>
 	<% end %>
 </div>
-<table>
-	<thead>
-		<th>name</th>
-		<th>address</th>
-	</thead>
-	<tbody>
-		<% @users.each do |user| %>
-		<tr>
-			<td><%= user.name%></td>
-			<td><%= user.address%></td>
-		</tr>
+<% @grandfathers.each do |grandfather| %>
+	<ul>
+		<li><%= grandfather.name%></li>				
+		<% grandfather.sons.each do |father| %>
+			<ul>
+				<li><%= father.name%></li>
+				<% father.sons.each do |son| %>		
+					<ul>
+						<li><%= son.name%></li>
+					</ul>
+				<% end %>
+			</ul>
 		<% end %>
-	</tbody>
-</table>
+	</ul>
+<% end %>
