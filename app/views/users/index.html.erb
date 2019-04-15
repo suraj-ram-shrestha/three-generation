@@ -1,1 +1,24 @@
 <h1>Users controller</h1>
+
+<%= flash[:notice] %>
+<div>
+	<h4>Import data!</h4>
+	<%= form_tag users_import_path, multipart: true do %>
+		<%= file_field_tag :file %>
+		<%= submit_tag "Import from file" %>
+	<% end %>
+</div>
+<table>
+	<thead>
+		<th>name</th>
+		<th>address</th>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+		<tr>
+			<td><%= user.name%></td>
+			<td><%= user.address%></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
