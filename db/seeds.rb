@@ -6,17 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-grandfather =
-  RelationshipType.find_or_create_by_name! 'grandfather', reverse_name: 'grandson'
-father =
-  RelationshipType.find_or_create_by_name! 'father', reverse_name: 'son'
+father = RelationshipType.where(name: 'father').last
+grandfather = RelationshipType.where(name: 'grandfather').last
 
 sanulal =
-  User.find_or_create_by_name! 'Sanu Lal Shrestha'
+  User.find_or_create_by(name: 'Sanu Lal Shrestha')
 rajaram =
-  User.find_or_create_by_name! 'Raja Ram Shrestha'
+  User.find_or_create_by(name: 'Raja Ram Shrestha')
 suraj =
-  User.find_or_create_by_name! 'Suraj Raj Shrestha'
+  User.find_or_create_by(name: 'Suraj Raj Shrestha')
 
 sanulal.relate(rajaram, father)
 rajaram.relate(suraj, father)
